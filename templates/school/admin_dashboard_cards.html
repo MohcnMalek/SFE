@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <style type="text/css">
+    a:link {
+      text-decoration: none;
+    }
+
+    .order-card {
+      color: #fff;
+    }
+
+    .bg-c-blue {
+      background: linear-gradient(45deg, #4099ff, #73b4ff);
+    }
+
+    .bg-c-green {
+      background: linear-gradient(45deg, #00CED1, #20B2AA);
+    }
+    
+    .bg-c-yellow {
+      background: linear-gradient(45deg, #00FFFF, #00CED1);
+    }
+    
+    .bg-c-pink {
+      background: linear-gradient(45deg, #FF4500, #FF6347);
+    }
+    .card {
+      border-radius: 5px;
+      -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+      box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+      border: none;
+      margin-bottom: 30px;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .card .card-block {
+      padding: 25px;
+    }
+
+    .order-card i {
+      font-size: 26px;
+    }
+
+    .f-left {
+      float: left;
+    }
+
+    .f-right {
+      float: right;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+     .table-data {
+      display: flex;
+      flex-wrap: wrap;
+      grid-gap: 24px;
+      margin-top: 24px;
+      width: 100%;
+      color: var(--dark);
+    }
+     .table-data > div {
+      border-radius: 20px;
+      background: var(--light);
+      padding: 24px;
+      overflow-x: auto;
+    }
+     .table-data .head {
+      display: flex;
+      align-items: center;
+      grid-gap: 16px;
+      margin-bottom: 24px;
+    }
+     .table-data .head h3 {
+      margin-right: auto;
+      font-size: 24px;
+      font-weight: 600;
+    }
+     .table-data .head .bx {
+      cursor: pointer;
+    }
+    
+     .table-data .order {
+      flex-grow: 1;
+      flex-basis: 500px;
+    }
+     .table-data .order table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+     .table-data .order table th {
+      padding-bottom: 12px;
+      font-size: 13px;
+      text-align: left;
+      border-bottom: 1px solid var(--grey);
+    }
+     .table-data .order table td {
+      padding: 16px 0;
+    }
+     .table-data .order table tr td:first-child {
+      display: flex;
+      align-items: center;
+      grid-gap: 12px;
+      padding-left: 6px;
+    }
+     .table-data .order table td img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+     .table-data .order table tbody tr:hover {
+      background: var(--grey);
+    }
+     .table-data .order table tr td .status {
+      font-size: 10px;
+      padding: 6px 16px;
+      color: var(--light);
+      border-radius: 20px;
+      font-weight: 700;
+    }
+     .table-data .order table tr td .status.completed {
+      background: var(--blue);
+    }
+     .table-data .order table tr td .status.process {
+      background: var(--yellow);
+    }
+     .table-data .order table tr td .status.pending {
+      background: var(--orange);
+    }
+    
+    
+     .table-data .todo {
+      flex-grow: 1;
+      flex-basis: 300px;
+    }
+     .table-data .todo .todo-list {
+      width: 100%;
+    }
+     .table-data .todo .todo-list li {
+      width: 100%;
+      margin-bottom: 16px;
+      background: var(--grey);
+      border-radius: 10px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+     .table-data .todo .todo-list li .bx {
+      cursor: pointer;
+    }
+     .table-data .todo .todo-list li.completed {
+      border-left: 10px solid var(--blue);
+    }
+     .table-data .todo .todo-list li.not-completed {
+      border-left: 10px solid var(--orange);
+    }
+     .table-data .todo .todo-list li:last-child {
+      margin-bottom: 0;
+    }
+    @media screen and (max-width: 576px) {
+
+
+       .table-data .head {
+        min-width: 420px;
+      }
+       .table-data .order table {
+        min-width: 420px;
+      }
+       .table-data .todo .todo-list {
+        min-width: 420px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-xl-3">
+        <div class="card bg-c-blue order-card">
+          <div class="card-block">
+            <h6 class="m-b-20">Total Energy Consumed</h6>
+            <h2 class="text-right"><i class="fas fa-bolt f-left"></i><span>{{total_client_energy}} KWH</span></h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3">
+        <div class="card bg-c-green order-card">
+          <div class="card-block">
+            <h6 class="m-b-20">Total chargepoint</h6>
+            <h2 class="text-right"><i class="fas fa-charging-station f-left"></i><span>{{chargepoint_count}}</span></h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3">
+        <div class="card bg-c-yellow order-card">
+          <div class="card-block">
+            <h6 class="m-b-20">Total Clients</h6>
+            <h2 class="text-right"><i class="fa fa-user f-left"></i><span>{{client_count}}</span></h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3">
+        <div class="card bg-c-pink order-card">
+          <div class="card-block">
+            <h6 class="m-b-20">Total Charging Fees</h6>
+            <h2 class="text-right"><i class="fas fa-money f-left"></i><span>{{total_client_amount}} DH</span></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-data">
+      <div class="order">
+          <div class="head">
+              <h3>Recent Charging Sessions</h3>
+              <i class='bx bx-search' ></i>
+              <i class='bx bx-filter' ></i>
+          </div>
+          <table>
+              <thead>
+                  <tr>
+                      <th>BankID</th>
+                      <th>Chargepoint ID</th>
+                      <th>Vehicul type</th>
+                      <th>Start Time</th>
+                      <th>End Time</th>
+                      <th>payment method</th>
+                      <th>Status</th>
+                  </tr>
+              </thead>
+              <tbody>
+                {% for session in recent_charging_sessions %}
+        <tr>
+          <td>{{ session.bank_id }}</td>
+          <td>{{ session.chargepoint_id }}</td>
+          <td>{{ session.vehicle_type }}</td>
+          <td>{{ session.start_time }}</td>
+          <td>{{ session.end_time }}</td>
+          <td>{{ session.payment_method }}</td>
+          <td><span class="status {{ session.status }}">{{ session.status }}</span></td>
+        </tr>
+        {% endfor %}
+                  <tr>
+                      <td>
+                          <p>UJ1234567</p>
+                      </td>
+                      <td>A1</td>
+                      <td>Motor</td>
+                      <td>2024-05-20 10:00 AM</td>
+                      <td>2024-05-20 11:30 AM</td>
+                      <td>Visa</td>
+                      <td><span class="status completed">Completed</span></td>
+                  </tr>
+              </tbody>
+          </table>
+
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+</body>
+
+</html>

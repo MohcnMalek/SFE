@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>POGO</title>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Roboto", sans-serif;
+    }
+
+    header {
+      position: fixed;
+      background: lightgrey; /* Changed to gray */
+      padding: 20px;
+      width: 100%;
+      z-index: 1;
+    }
+
+    .left_area h3 {
+      color: black; /* Changed to black */
+      margin: 0px;
+      text-transform: uppercase;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .left_area span {
+      color: black; /* Changed to black */
+    }
+
+    .logout_btn {
+      padding: 5px;
+      text-decoration: none;
+      float: right;
+      margin-top: -30px;
+      margin-right: 40px;
+      border-radius: 2px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      transition: 0.5s;
+      background-color:red;
+    }
+
+    .logout_btn:hover {
+      background: #0B87A6;
+    }
+
+    .sidebar {
+      background: lightgrey; /* Changed to gray */
+      margin-top: 70px;
+      padding-top: 30px;
+      position: fixed;
+      left: 0;
+      width: 250px;
+      height: 100%;
+      transition: 0.5s;
+      transition-property: left;
+    }
+
+    .profile_image {
+      height: 50px;
+    }
+
+    .sidebar h4 {
+      color: #ccc;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .sidebar a {
+      color: #fff;
+      display: block;
+      width: 100%;
+      line-height: 60px;
+      text-decoration: none;
+      padding-left: 40px;
+      box-sizing: border-box;
+      transition: 0.5s;
+    }
+
+    .sidebar a:hover {
+      background: #19B3D3;
+    }
+
+    .sidebar i.fas {
+      color: black;
+      padding-right: 10px;
+    }
+    .sidebar span {
+      color: black;
+     
+    }
+
+    label #sidebar_btn {
+      z-index: 1;
+      color: #fff;
+      position: fixed;
+      cursor: pointer;
+      left: 300px;
+      font-size: 20px;
+      margin: 5px 0;
+      transition: 0.5s;
+      transition-property: color;
+    }
+
+    label #sidebar_btn:hover {
+      color: #19B3D3;
+    }
+
+    #check:checked~.sidebar {
+      left: -190px;
+    }
+
+    #check:checked~.sidebar a span {
+      display: none;
+    }
+
+    #check:checked~.sidebar a {
+      font-size: 20px;
+      margin-left: 170px;
+      width: 80px;
+    }
+
+    .content {
+      margin-left: 250px;
+      background: url(background.png) no-repeat;
+      background-position: center;
+      background-size: cover;
+      height: 100vh;
+      transition: 0.5s;
+    }
+
+    #check:checked~.content {
+      margin-left: 60px;
+    }
+
+    #check {
+      display: none;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+</head>
+
+<body>
+
+  <input type="checkbox" id="check">
+  <!--header area start-->
+  <header>
+    <label for="check">
+      <i class="fas fa-bars" id="sidebar_btn"></i>
+    </label>
+    <div class="left_area">
+      <h3><img src="{% static "images/pogo.png" %}" class="profile_image" alt=""></h3>
+    </div>
+    <div class="right_area">
+      <a href="/logout" class="logout_btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="sidebar">
+    <center>
+      <h4></h4>
+    </center>
+    <a href="/admin-dashboard"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+    <a href="/admin-chargepoint"><i class="fas fa-cogs"></i><span>Chargepoint Management</span></a>
+    <a href="/admin-client"><i class="fas fa-user"></i><span>Clients</span></a>
+    <a href="/admin-user"><i class="fas fa-user-secret"></i><span>Users</span></a>
+    <a href="/ocpp-simulateur"><i class="fas fa-plug"></i><span>Ocpp Simulators</span></a>
+  </div>
+  <div class="content">
+    <br><br><br><br><br>
+    {% block content %}
+    {% endblock content %}
+  </div>
+  <!--content end-->
+  <!--
+      written By : sumit kumar
+      facebook : fb.com/sumit.luv
+      -->
+</body>
+
+</html>
