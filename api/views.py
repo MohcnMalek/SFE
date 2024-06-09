@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from school.models import ChargePointExtra, Client, Users, ChargingSession
+from chargepoint.models import ChargePointExtra, Client, Users, ChargingSession
 from .serializers import ChargePointExtraSerializer, ClientSerializer, UsersSerializer, ChargingSessionSerializer
 
 @api_view(['GET'])

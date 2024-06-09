@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from school.models import ChargePointExtra, Client, Users, ChargingSession
+from chargepoint.models import ChargePointExtra, Client, Users, ChargingSession
 
 class ChargePointExtraSerializer(serializers.ModelSerializer):
     class Meta:

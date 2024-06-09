@@ -8,12 +8,12 @@ from . import ocpp_client
 def home_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
-    return render(request, 'school/index.html')
+    return render(request, 'chargepoint/index.html')
 
 def adminclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
-    return render(request, 'school/adminclick.html')
+    return render(request, 'chargepoint/adminclick.html')
 
 def admin_signup_view(request):
     form = forms.AdminSigupForm()
@@ -28,7 +28,7 @@ def admin_signup_view(request):
             my_admin_group[0].user_set.add(user)
 
             return HttpResponseRedirect('adminlogin')
-    return render(request, 'school/adminsignup.html', {'form': form})
+    return render(request, 'chargepoint/adminsignup.html', {'form': form})
 
 def is_admin(user):
     return user.groups.filter(name='ADMIN').exists()
@@ -57,12 +57,12 @@ def admin_dashboard_view(request):
         'charging_sessions': charging_sessions
     }
 
-    return render(request, 'school/admin_dashboard.html', context=mydict)
+    return render(request, 'chargepoint/admin_dashboard.html', context=mydict)
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_chargepoint_view(request):
-    return render(request, 'school/admin_chargepoint.html')
+    return render(request, 'chargepoint/admin_chargepoint.html')
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -75,26 +75,26 @@ def admin_add_chargepoint_view(request):
             chargepoint.status = True
             chargepoint.save()
             return HttpResponseRedirect('admin-chargepoint')
-    return render(request, 'school/admin_add_chargepoint.html', {'form': form})
+    return render(request, 'chargepoint/admin_add_chargepoint.html', {'form': form})
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_view_chargepoint_view(request):
     chargepoints = models.ChargePointExtra.objects.filter(status=True)
-    return render(request, 'school/admin_view_chargepoint.html', {'chargepoints': chargepoints})
+    return render(request, 'chargepoint/admin_view_chargepoint.html', {'chargepoints': chargepoints})
 
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_approve_chargepoint_view(request):
     chargepoints = models.ChargePointExtra.objects.filter(status=True)
-    return render(request, 'school/admin_approve_chargepoint.html', {'chargepoints': chargepoints})
+    return render(request, 'chargepoint/admin_approve_chargepoint.html', {'chargepoints': chargepoints})
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_update_chargepoint_view(request):
     chargepoints = models.ChargePointExtra.objects.filter(status=True)
-    return render(request, 'school/update_chargepoint.html', {'chargepoints': chargepoints})
+    return render(request, 'chargepoint/update_chargepoint.html', {'chargepoints': chargepoints})
 
 
 
@@ -118,13 +118,13 @@ def update_chargepoint_view(request, pk):
         if form.is_valid():
             form.save()
             return redirect('admin-update-chargepoint')
-    return render(request, 'school/admin_update_chargepoint.html', {'form': form})
+    return render(request, 'chargepoint/admin_update_chargepoint.html', {'form': form})
 
 # ------------------------------------------------------------Clients------------------------------------------------------------------------
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_client_view(request):
-    return render(request, 'school/admin_client.html')
+    return render(request, 'chargepoint/admin_client.html')
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -138,25 +138,25 @@ def admin_add_client_view(request):
             client.save()
             # Redirect to the admin-client page after successfully adding the client
             return redirect('admin-client')
-    return render(request, 'school/admin_add_client.html', {'form': form})
+    return render(request, 'chargepoint/admin_add_client.html', {'form': form})
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_view_client_view(request):
     clients = models.Client.objects.filter(status=True)
-    return render(request, 'school/admin_view_client.html', {'clients': clients})
+    return render(request, 'chargepoint/admin_view_client.html', {'clients': clients})
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_approve_client_view(request):
     clients = models.Client.objects.filter(status=True)
-    return render(request, 'school/admin_approve_client.html', {'clients': clients})
+    return render(request, 'chargepoint/admin_approve_client.html', {'clients': clients})
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_update_client_view(request):
     clients = models.Client.objects.filter(status=True)
-    return render(request, 'school/update_client.html', {'clients': clients})
+    return render(request, 'chargepoint/update_client.html', {'clients': clients})
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -176,13 +176,13 @@ def update_client_view(request, pk):
         if form.is_valid():
             form.save()
             return redirect('admin-update-client')
-    return render(request, 'school/admin_update_client.html', {'form': form})
+    return render(request, 'chargepoint/admin_update_client.html', {'form': form})
 
 # ------------------------------------------------------------Users------------------------------------------------------------------------
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_user_view(request):
-    return render(request, 'school/admin_user.html')
+    return render(request, 'chargepoint/admin_user.html')
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -196,25 +196,25 @@ def admin_add_user_view(request):
             user.save()
             # Redirect to the admin-user page after successfully adding the user
             return redirect('admin-user')
-    return render(request, 'school/admin_add_user.html', {'form': form})
+    return render(request, 'chargepoint/admin_add_user.html', {'form': form})
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_view_user_view(request):
     users = models.Users.objects.all()  # Modification de la requête pour récupérer tous les utilisateurs
-    return render(request, 'school/admin_view_user.html', {'users': users})
+    return render(request, 'chargepoint/admin_view_user.html', {'users': users})
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_approve_user_view(request):
     users = models.Users.objects.all()
-    return render(request, 'school/admin_approve_user.html', {'users': users})
+    return render(request, 'chargepoint/admin_approve_user.html', {'users': users})
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_update_user_view(request):
     users = models.Users.objects.all()
-    return render(request, 'school/update_user.html', {'users': users})
+    return render(request, 'chargepoint/update_user.html', {'users': users})
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -234,4 +234,4 @@ def update_user_view(request, pk):
         if form.is_valid():
             form.save()
             return redirect('admin-update-user')
-    return render(request, 'school/admin_update_user.html', {'form': form})
+    return render(request, 'chargepoint/admin_update_user.html', {'form': form})
